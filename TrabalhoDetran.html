@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Infrações</title>
+
+    <link rel="stylesheet" href="CSS/estilo.css">
+
+    <style>
+        body{
+    background-image: url(img/fundo.jpg);
+}
+    </style>
+</head>
+<body>
+    <header class="imagem">
+        <div class="opacidade"></div>
+        <div class="topo">
+            <div class="logo"></a></div>
+            <div class="menu">
+               <h1>Saiba tudo sobre a sua infração.</h1>
+            </div>
+        </div>
+        <div id="caixa">
+            <div id="cadastro">
+                    <fieldset style="background-color:#eba834;">
+                        <legend style="background-color: #eba834; border: 1px solid black; color: white; font-size:larger;">Digite as informações abaixo:</legend>
+                        <table cellspacing="20" id="cad">
+                            <tr>
+                                <td>
+                                    <label for="velMax">Velocidade máxima da via:</label>
+                                </td>
+                                <td>
+                                    <input type="number" name="velMax" id="velMax" size="3" maxlength="5" placeholder="Km/h:"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="velCar">Velocidade do carro:</label>
+                                </td>
+                                <td>
+                                    <input type="number" id="velCar" name="velCar" size="3" maxlength="5" placeholder="Km/h:" onchange="confVel()"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="res">Nível da infração:</label>
+                                </td>
+                                <td>
+                                    <div id="res"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="val">Valor da multa:</label>
+                                </td>
+                                <td>
+                                    <div id="val"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="pont">Pontos na carteira:</label>
+                                </td>
+                                <td>
+                                    <div id="pont"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="nome">Nome do condutor:</label>
+                                </td>
+                                <td>
+                                    <input type="text" name="nome" id="nome" maxlength="30" size="20"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="nCart">Nº carteira de motorista:</label>
+                                </td>
+                                <td>
+                                    <input type="number" name="nCart" id="nCart" maxlength="15" size="15"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                </td>
+                                <td>
+                                    <button type="button" onclick="window.print()">
+                                        Imprimir!
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                    </fieldset>
+            </div>
+        </div>
+    </header>
+
+    <footer>
+        <div class="caixa">
+            <div class="rodape">
+                <h3>DetranMG</h3>
+                <p>https://www.detran.mg.gov.br</p>
+                
+                
+            </div>
+            <div class="clear"></div>
+        </div>
+    </footer>
+
+    
+
+    <script>
+        function confVel() {
+            vMax = document.getElementById("velMax").value;
+            vCar = document.getElementById("velCar").value;
+
+            vCar = Number(vCar);
+            vMax = Number(vMax);
+
+            if (vCar <= vMax) {
+                document.getElementById('res').innerHTML = "Abaixo do limite de velocidade";
+                document.getElementById('val').innerHTML = "R$ 0";
+                document.getElementById('pont').innerHTML = "Não gera pontos na carteira.";
+            } 
+            else if ( vCar >= ++vMax && vCar <= vMax+6) {
+                document.getElementById('res').innerHTML = "Advertência!";
+                document.getElementById('val').innerHTML = "R$ 0";
+                document.getElementById('pont').innerHTML = "Não gera pontos na carteira.";
+            }
+            else if (vCar >= vMax+7 && vCar <= (vMax*1.20)) {
+                document.getElementById('res').innerHTML = "Infração Média!";
+                document.getElementById('val').innerHTML = "R$ 130,16";
+                document.getElementById('pont').innerHTML = "Gera 4 pontos na carteira.";
+            }
+            else if (vCar > (vMax*1.20) && vCar <= (vMax*1.50)) {
+                document.getElementById('res').innerHTML = "Infração Grave!";
+                document.getElementById('val').innerHTML = "R$ 195,23";
+                document.getElementById('pont').innerHTML = "Gera 5 pontos na carteira.";
+            }
+            else {
+                document.getElementById('res').innerHTML = "Infração Gravíssima!";
+                document.getElementById('val').innerHTML = "R$ 880,41";
+                document.getElementById('pont').innerHTML = "Suspensão do direito de dirigir.";
+            }
+        }
+    </script>
+</body>
+</html>
